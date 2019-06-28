@@ -4,8 +4,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/devices")
 public class DeviceController {
@@ -22,7 +20,6 @@ public class DeviceController {
     @CrossOrigin
     @PostMapping("/new")
     public Device newDevice(@RequestBody String body){
-
         try {
             JSONObject obj = new JSONObject(body);
             String name = obj.getString("name");
@@ -30,9 +27,9 @@ public class DeviceController {
             String metricDate = obj.getString("metricDate");
             String deviceType = obj.getString("deviceType");
             String metricValue = obj.getString("metricValue");
-
+            System.out.println(deviceRepository);
             Device askedDevice = deviceRepository.findByMacAddress(macAddress);
-            System.out.println(askedDevice);
+            System.out.println("Asked device = " + askedDevice);
 
             if (askedDevice == null){
                 //Device isn't existing
